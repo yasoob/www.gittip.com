@@ -54,6 +54,9 @@ class Participant(db.Model):
     last_ach_result = Column(Text)
     is_suspicious = Column(Boolean)
     type = Column(Enum('individual', 'group', 'open group', nullable=False))
+    email_address = Column(Text)
+    email_confirmed = Column(Boolean, nullable=False, default=False)
+    email_collected = Column(TIMESTAMP(timezone=True), default=None)
 
     ### Relations ###
     accounts_elsewhere = relationship( "Elsewhere"

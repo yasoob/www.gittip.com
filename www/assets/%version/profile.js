@@ -334,4 +334,41 @@ $(document).ready(function()
              }
         );
     });
+
+    // Wire up email address input.
+    // ============================
+    $('a.email').click(function()
+    {
+        // "Link email address" text or existing
+        // email was clicked, show the text box
+        $('.email').toggle();
+        $('input.email').focus();
+    });
+    $('form.email-submit').submit(function(event)
+    {
+        event.preventDefault();
+
+        $('button.email').text('Saving ...');
+        var address = $('input.email').val();
+
+        jQuery.ajax({
+            url: "email.json",
+            type: "POST",
+            dataType: "json",
+            data: {
+                email: address
+            },
+            success: function(data) {
+                $('a.email').text(data.email);
+                $('.email').toggle();
+                $('button.email').text('Save');
+            },
+            error: function() {
+                $('button.email').text('Save');
+                alert('Failed to save your email address. ' +
+                    'Please try again.'
+                );
+            }
+        });
+    });
 });
