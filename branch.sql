@@ -17,7 +17,7 @@ BEGIN;
                                                      REFERENCES participants
                                                      ON UPDATE CASCADE
                                                      ON DELETE RESTRICT
-    );
+     );
 
 
     CREATE RULE log_email_changes AS ON UPDATE
