@@ -21,10 +21,10 @@ BEGIN;
 
 
     CREATE RULE log_email_changes AS ON UPDATE
-        TO participants WHERE (OLD.email_notifications IS NULL AND NOT NEW.email_notifications IS NULL)
-                        OR (NEW.email_notifications IS NULL AND NOT OLD.email_notifications IS NULL)
-                        OR NEW.email_notifications <> OLD.email_notifications
-        DO INSERT INTO emails (email, usage, participant)
-            VALUES (NEW.email_notifications, 'notifications', OLD.username);
+        TO participants WHERE (OLD.email IS NULL AND NOT NEW.email IS NULL)
+                        OR (NEW.email IS NULL AND NOT OLD.email IS NULL)
+                        OR NEW.email <> OLD.email
+        DO INSERT INTO emails (email, participant)
+                VALUES (NEW.email, OLD.username);
 
 END;
