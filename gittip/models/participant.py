@@ -315,9 +315,9 @@ class Participant(db.Model):
             SELECT team AS name
                  , ( SELECT count(*)
                        FROM current_memberships
-                      WHERE team=team
+                      WHERE team=x.team
                     ) AS nmembers
-              FROM current_memberships
+              FROM current_memberships x
              WHERE member=%s;
 
         """, (self.username,)))

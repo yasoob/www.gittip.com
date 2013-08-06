@@ -1,5 +1,8 @@
 This is [Gittip](https://www.gittip.com/), a weekly gift exchange.
 
+Ensure that you have `en_US.UTF-8` locale installed when working on a
+non-Windows machine. To find out how, see
+http://stackoverflow.com/q/14547631/321731.
 
 Quick Start
 ===========
@@ -30,6 +33,7 @@ Table of Contents
   - [Building and Launching](#building-and-launching)
   - [Help!](#help)
  - [Configuration](#configuration)
+ - [Modifying CSS](#modifying-css)
  - [Testing](#testing-)
  - [Setting up a Database](#local-database-setup)
  - [API](#api)
@@ -195,6 +199,21 @@ should change the `DATABASE_URL` using the following format:
     DATABASE_URL=postgres://<username>@localhost/<database name>
 
 
+Modifying CSS
+=============
+
+We use SCSS, with files stored in `scss/`. Out of the box, your Gittip
+installation will use the stylesheet from production, per the `GITTIP_CSS_HREF`
+setting in `local.env`. If you want to modify styles then you should install
+[sass](http://sass-lang.com/) and change `GITTIP_CSS_HREF` in your `local.env`
+to `/assets/-/gittip.css`. That will route to
+`www/assets/%version/gittip.css.spt`, which is a simplate that shells out to
+`sass` to dynamically generate the stylesheet on each request. The `-` prevents
+HTTP caching. Sass does its own caching on disk so it's performant enough for
+development (in production we route through a CDN so the origin only gets hit
+once per new version).
+
+
 Testing [![Testing](https://secure.travis-ci.org/gittip/www.gittip.com.png)](http://travis-ci.org/gittip/www.gittip.com)
 =======
 
@@ -305,7 +324,7 @@ production database as part of deployment.
 The gittip database created in the last step is empty. To populate it with
 some fake data, so that more of the site is functional, run this command:
 
-    $ make fake_data
+    $ make data
 
 ### Notes for Mac OS X users
 
@@ -328,6 +347,7 @@ You will need to restart Postgres for the max_connections parameter to
 take effect. Once restarted, the test suite should pass for you. These changes
 will not persist after a reboot, so you will have to set these again after
 a reboot.
+
 
 API
 ===
