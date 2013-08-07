@@ -54,9 +54,7 @@ class Participant(db.Model):
     api_key = Column(Text)
     is_suspicious = Column(Boolean)
     number = Column(Enum('singular', 'plural', nullable=False))
-    email_address = Column(Text)
-    email_confirmed = Column(Boolean, nullable=False, default=False)
-    email_collected = Column(TIMESTAMP(timezone=True), default=None)
+    email = Column(Text)
 
     ### Relations ###
     accounts_elsewhere = relationship( "Elsewhere"
