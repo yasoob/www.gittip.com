@@ -213,6 +213,11 @@ class Participant(object):
             assert suggested == rec['username']  # sanity check
             self.username = suggested
 
+    @require_username
+    def set_email(self, email, confirmed=False):
+      gittip.db.run("UPDATE participants "
+                    "SET email = (%s, %s) WHERE username=%s",
+                    (email, confirmed, self.username))
 
     @require_username
     def get_accounts_elsewhere(self):

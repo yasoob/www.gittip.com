@@ -113,6 +113,18 @@ class TestParticipant(Harness):
             twitter_account = TwitterAccount(idx, {'screen_name': username})
             Participant(username).take_over(twitter_account)
 
+    def test_can_change_email(self):
+        Participant('alice').set_email('alice@gmail.com')
+        expected = '(alice@gmail.com,f)'
+        actual = Participant('alice').get_details()['email']
+        assert_equals(actual, expected)
+
+    def test_can_confirm_email(self):
+        Participant('alice').set_email('alice@gmail.com', True)
+        expected = '(alice@gmail.com,t)'
+        actual = Participant('alice').get_details()['email']
+        assert_equals(actual, expected)
+
     def test_cant_take_over_claimed_participant_without_confirmation(self):
         bob_twitter = StubAccount('twitter', '2')
         with assert_raises(NeedConfirmation):

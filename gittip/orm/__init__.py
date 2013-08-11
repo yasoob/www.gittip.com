@@ -54,6 +54,7 @@ class SQLAlchemy(object):
     def empty_tables(self):
         gittip.db.run("DELETE FROM memberships") # *sigh*
         gittip.db.run("DELETE FROM log_participant_number") # *sigh*
+        gittip.db.run("DELETE FROM emails") # *sigh*
         tables = reversed(self.metadata.sorted_tables)
         for table in tables:
             try:
