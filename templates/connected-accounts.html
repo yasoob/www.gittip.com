@@ -142,7 +142,7 @@
             <form class="email-submit">
                 <input type="email" class="email hidden"
                     {% if participant.email %}
-                        value="{{ participant.get_email().address }}"
+                        value="{{ participant.email.address }}"
                     {% end %}
                 >
                 <button type="submit" class="email hidden">Save</button>
