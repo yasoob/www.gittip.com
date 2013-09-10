@@ -127,25 +127,26 @@
                     >on Balanced Payments</a>{% else %}on Balanced Payments{% end %}</div>
         </td>
     </tr>
-    {% if user == participant or user.ADMIN %}
+    {% if user.participant == participant or user.ADMIN %}
     <tr>
         <td class="account-type">
             <img src="/assets/octocat.png" /><!-- This needs to change -->
         </td>
         <td class="account-details">
 
-            {% if participant.email_address is None %}
-                <a class="email">Link an email address</a>
+            {% if participant.email is None %}
+                <a href="javascript:;" class="email">Link an email address</a>
             {% else %}
-                <a class="email">{{ participant.email_address }}</a>
+                <a href="javascript:;" class="email">{{ participant.get_email().address }}</a>
             {% end %}
             <form class="email-submit">
                 <input type="email" class="email hidden"
-                    {% if participant.email_address %}
-                        value="{{ participant.email_address }}"
+                    {% if participant.email %}
+                        value="{{ participant.get_email().address }}"
                     {% end %}
                 >
                 <button type="submit" class="email hidden">Save</button>
+                <button type="cancel" class="email cancel hidden">Cancel</button>
             </form>
             <div class="account-type">(not publicly viewable)</div>
         </td>

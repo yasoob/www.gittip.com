@@ -291,8 +291,17 @@ class Participant(Model, MixinElsewhere, MixinTeam):
 
     def change_email(self, email, confirmed=False):
         gittip.db.run("UPDATE participants "
-                      "SET email = (%s, %s) WHERE username=%s",
+                      "SET email = ROW(%s, %s) WHERE username=%s",
                       (email, confirmed, self.username))
+        self.set_attributes(email=(email, confirmed))
+
+    
+    def get_email(self):
+        rec = gittip.db.one("SELECT (email).address, (email).confirmed "
+                            "FROM participants WHERE username=%s",
+                            (self.username,))
+
+        return rec
 
 
     def update_goal(self, goal):

@@ -8,7 +8,7 @@ from aspen import Response
 
 
 
-# ========================================================================== ^L
+[-----------------------------------------]
 
 if not POST:
     body = {'error': 'HTTP method must be POST'}
@@ -43,5 +43,6 @@ else:
         response = Response(400, json.dumps(body))
     else:
         # Woohoo! valid request, store it!
+        user.participant.change_email(address)
 
         response.body = {'email': address}
