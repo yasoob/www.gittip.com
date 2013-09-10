@@ -127,7 +127,7 @@
                     >on Balanced Payments</a>{% else %}on Balanced Payments{% end %}</div>
         </td>
     </tr>
-    {% if user == participant or user.is_admin %}
+    {% if user == participant or user.ADMIN %}
     <tr>
         <td class="account-type">
             <img src="/assets/octocat.png" /><!-- This needs to change -->
