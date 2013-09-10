@@ -137,7 +137,7 @@
             {% if participant.email is None %}
                 <a href="javascript:;" class="email">Link an email address</a>
             {% else %}
-                <a href="javascript:;" class="email">{{ participant.get_email().address }}</a>
+                <a href="javascript:;" class="email">{{ participant.email.address }}</a>
             {% end %}
             <form class="email-submit">
                 <input type="email" class="email hidden"
