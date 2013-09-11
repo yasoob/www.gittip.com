@@ -136,14 +136,14 @@ class TestParticipant(Harness):
 
     def test_can_change_email(self):
         Participant.from_username('alice').change_email('alice@gmail.com')
-        expected = '(alice@gmail.com,f)'
-        actual = Participant.from_username('alice').email
+        expected = 'alice@gmail.com'
+        actual = Participant.from_username('alice').email.address
         assert_equals(actual, expected)
 
     def test_can_confirm_email(self):
         Participant.from_username('alice').change_email('alice@gmail.com', True)
-        expected = '(alice@gmail.com,t)'
-        actual = Participant.from_username('alice').email
+        expected = True
+        actual = Participant.from_username('alice').email.confirmed
         assert_equals(actual, expected)
 
     def test_cant_take_over_claimed_participant_without_confirmation(self):
