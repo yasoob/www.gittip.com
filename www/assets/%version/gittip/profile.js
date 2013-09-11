@@ -402,33 +402,4 @@ $(document).ready(function()
 
             return false;
         });
-
-
-    // $('form.email-submit').submit(function(event)
-    // {
-    //     event.preventDefault();
-
-    //     $('[type=submit]').text('Saving...');
-    //     var address = $('input.email').val();
-
-    //     jQuery.ajax({
-    //         url: "email.json",
-    //         type: "POST",
-    //         dataType: "json",
-    //         data: {
-    //             email: address
-    //         },
-    //         success: function(data) {
-    //             $('a.email').text(data.email);
-    //             $('.email').toggle();
-    //             $('[type=').text('Save');
-    //         },
-    //         error: function() {
-    //             $('button.email').text('Save');
-    //             alert('Failed to save your email address. ' +
-    //                 'Please try again.'
-    //             );
-    //         }
-    //     });
-    // });
 });
